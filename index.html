@@ -1,1 +1,78 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1minimum-scale=1maximum-scale=1user-scalable=no"><link rel="shortcut icon" href=static/favicon.ico><link rel=bookmark href=static/favicon.ico><title>CIMF</title><link href=/static/css/app.383bd48068a944f5df24599630b9dad3.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.fc433ba8bec67176793c.js></script><script type=text/javascript src=/static/js/app.42f887d547048d24285c.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer {
+            width: 500px;
+            margin: 50px auto;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            /*
+                点击按钮切换图片
+             */
+            let prev = document.getElementById(`prev`);
+            let next = document.getElementById(`next`);
+            //要切换图片就是要修改 img 标签的 src 属性
+            //分别为两个按钮绑定单击响应函数
+
+            //获取img标签
+            let img = document.getElementsByTagName(`img`)[0];
+
+            //创建一个数组，用来保存图片的路径
+            let imgArr = [`img/001.jpg`, `img/002.jpg`, `img/003.jpg`, `img/004.jpg`];
+
+            //创建一个变量，来保存当前正在显示的图片的索引
+            let index = 0;
+
+            let info = document.getElementById(`info`);
+            info.innerHTML = `一共${imgArr.length}张图片，当前第${index + 1}张`;
+
+            prev.onclick = function () {
+                // alert(`上一张`);
+                // img.src = `img/001.jpg`;
+                //切换到上一张，索引自减
+                index--;
+                //判断index是否小于0
+                if (index < 0) {
+                    index = imgArr.length - 1;
+                }
+                info.innerHTML = ``;
+                img.src = imgArr[index];
+                //当点击按钮以后，重新设置信息
+                info.innerHTML = `一共${imgArr.length}张图片，当前第${index + 1}张`;
+            };
+            next.onclick = function () {
+                // alert(`下一张`);
+                //切换图片就是修改 img 的 src 属性
+                //要修改一个元素的属性 元素.属性 = 属性值
+                // img.src = `img/002.jpg`;
+                index++;
+                if (index > imgArr.length - 1) {
+                    index = 0;
+                }
+                img.src = imgArr[index];
+                info.innerHTML = `一共${imgArr.length}张图片，当前第${index + 1}张`;
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="outer">
+    <p id="info"></p>
+    <img src="img/001.jpg" alt="葫芦娃">
+    <button id="prev">上一张</button>
+    <button id="next">下一张</button>
+</div>
+</body>
+</html>
